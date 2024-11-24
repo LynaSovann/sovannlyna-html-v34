@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sovannlyna-html-v34-https-ingress
+  namespace: sovannlyna-html-v34
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - sovannlyna-html-v34.assessify.org
+      secretName: sovannlyna-html-v34-secret-tls
+  rules:
+    - host: sovannlyna-html-v34.assessify.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sovannlyna-html-v34-service
+                port:
+                  number: 8232
