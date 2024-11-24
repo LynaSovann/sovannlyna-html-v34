@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sovannlyna-html-v34-deployment
+  labels:
+    app: sovannlyna-html-v34
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sovannlyna-html-v34
+  template:
+    metadata:
+      labels:
+        app: sovannlyna-html-v34
+    spec:
+      containers:
+        - name: sovannlyna-html-v34-container
+          image: pipejet/sovannlyna-html-v34:0
+          ports:
+            - containerPort: 80
